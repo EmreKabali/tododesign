@@ -40,7 +40,7 @@ class _NavigationPageState extends State<NavigationPage> {
         padding: EdgeInsets.symmetric(horizontal: 12),
         height: 58,
         decoration: BoxDecoration(
-          color: Colors.orange,
+          color: Colors.white,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(12),
             topRight: Radius.circular(12),
@@ -58,9 +58,11 @@ class _NavigationPageState extends State<NavigationPage> {
                 });
               },
               child: Icon(
-                Icons.home,
-                size: activeIndex == 0 ? 40 : 30,
-                color: activeIndex == 0 ? Colors.white : Colors.grey[350],
+                Icons.home_outlined,
+                size: 30,
+                color: activeIndex == 0
+                    ? Color.fromARGB(255, 52, 243, 233)
+                    : Colors.grey[350],
               ),
             ),
             GestureDetector(
@@ -72,8 +74,10 @@ class _NavigationPageState extends State<NavigationPage> {
               },
               child: Icon(
                 Icons.search,
-                size: activeIndex == 1 ? 40 : 30,
-                color: activeIndex == 1 ? Colors.white : Colors.grey[350],
+                size: 30,
+                color: activeIndex == 1
+                    ? Color.fromARGB(255, 52, 243, 233)
+                    : Colors.grey[350],
               ),
             ),
             GestureDetector(
@@ -85,8 +89,10 @@ class _NavigationPageState extends State<NavigationPage> {
               },
               child: Icon(
                 Icons.person,
-                size: activeIndex == 2 ? 40 : 30,
-                color: activeIndex == 2 ? Colors.white : Colors.grey[350],
+                size: 30,
+                color: activeIndex == 2
+                    ? Color.fromARGB(255, 52, 243, 233)
+                    : Colors.grey[350],
               ),
             )
           ],

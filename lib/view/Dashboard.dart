@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wordsreminder/model/Task.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -8,6 +9,13 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  List<Task> fakeTasks = [
+    Task(Colors.green, 0.5, 'Create calendar', 'Calendar'),
+    Task(Colors.orange, 0.9, 'Complete your homework', 'Calendar'),
+    Task(Colors.blue, 0.4, 'Build a plan ', 'Calendar'),
+    Task(Colors.orange, 0.3, 'Give somethings', 'Calendar'),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -39,7 +47,7 @@ class _DashboardState extends State<Dashboard> {
                 ],
               ),
               SizedBox(
-                height: 40,
+                height: 20,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -51,13 +59,33 @@ class _DashboardState extends State<Dashboard> {
                 ],
               ),
               Container(
-                height: 300,
+                height: 330,
                 child: ListView.builder(
                     scrollDirection: Axis.vertical,
-                    itemCount: 5,
+                    itemCount: fakeTasks.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return TaskCard();
+                      var current = fakeTasks[index];
+                      return TaskCard(current);
                     }),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text('ABOUT'),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Task Summary',
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  ),
+                  Icon(Icons.segment)
+                ],
               )
             ],
           ),
@@ -68,9 +96,9 @@ class _DashboardState extends State<Dashboard> {
 }
 
 class TaskCard extends StatelessWidget {
-  const TaskCard({
-    Key? key,
-  }) : super(key: key);
+  Task task;
+
+  TaskCard(this.task);
 
   @override
   Widget build(BuildContext context) {
@@ -82,19 +110,38 @@ class TaskCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Row(
-            children: [Text('Task Name')],
+            children: [Text(task.description)],
           ),
           SizedBox(
             height: 10,
           ),
-          Container(
-            child: Container(
-              height: 8,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  color: Colors.green, borderRadius: BorderRadius.circular(10)),
-            ),
+          Row(
+            children: [
+              Flexible(
+                child: Container(
+                  child: Container(
+                    height: 8,
+                    width: MediaQuery.of(context).size.width * task.count,
+                    decoration: BoxDecoration(
+                        color: task.color,
+                        borderRadius: BorderRadius.circular(10)),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Text(
+                '%' + (task.count).toString(),
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+              ),
+              Text(
+                ' complete',
+                style: TextStyle(fontSize: 9),
+              )
+            ],
           ),
+
           SizedBox(
             height: 10,
           ),
